@@ -1,29 +1,31 @@
-# Classe que representa um veículo
 class Veiculo:
-    def __init__(self, placa, modelo, ano):
-        self.placa = placa
+    def __new__(cls, *args, **kwargs):
+        print("Criando um novo veículo...")
+        instance = super().__new__(cls)
+        return instance
+
+    def __init__(self, marca, modelo, ano):
+        self.marca = marca
         self.modelo = modelo
         self.ano = ano
 
     def __str__(self):
-        return f"Placa: {self.placa}, Modelo: {self.modelo}, Ano: {self.ano}"
+        return f"{self.marca} {self.modelo} ({self.ano})"
+    
 
-# Classe para gerenciar o cadastro de veículos
-class CadastroVeiculos:
+class GerenciadorVeiculos:
     def __init__(self):
         self.veiculos = []
 
-    def cadastrar_veiculo(self, placa, modelo, ano):
-        """Cadastra um veículo"""
-        veiculo = Veiculo(placa, modelo, ano)
+    def adicionar_veiculo(self, marca, modelo, ano):
+        veiculo = Veiculo(marca, modelo, ano)
         self.veiculos.append(veiculo)
-        print(f"Veículo com placa {placa} cadastrado com sucesso.")
 
     def listar_veiculos(self):
-        """Lista todos os veículos cadastrados"""
-        if self.veiculos:
-            print("\nLista de veículos cadastrados:")
-            for veiculo in self.veiculos:
-                print(veiculo)
+        if not self.veiculos:
+            print("Nenhum veículo cadastrado.")
         else:
-            print("Não há veículos cadastrados.")
+            print("Veículos cadastrados:")
+            for idx, veiculo in enumerate(self.veiculos, 1):
+                print(f"{idx}. {veiculo}")
+    
