@@ -1,5 +1,5 @@
-# Importando as funções do arquivo 'funcoes.py'
-from funcoes import cadastrar_veiculo, listar_veiculos
+# Importando as classes do arquivo 'funcoes.py'
+from classes import Veiculo, CadastroVeiculos
 
 def menu():
     """Função para exibir o menu de opções"""
@@ -9,21 +9,21 @@ def menu():
     print("3. Sair")
 
 def main():
-    veiculos = []  # Lista para armazenar os veículos cadastrados
+    cadastro = CadastroVeiculos()  # Criando uma instância de CadastroVeiculos
 
     while True:
         menu()
         opcao = input("Escolha uma opção: ")
 
         if opcao == '1':
-            modelo = input("Digite o modelo do veículo: ")
             placa = input("Digite a placa do veículo: ")
+            modelo = input("Digite o modelo do veículo: ")
             ano = input("Digite o ano do veículo: ")
 
-            cadastrar_veiculo(veiculos, modelo, placa, ano)
+            cadastro.cadastrar_veiculo(placa, modelo, ano)
 
         elif opcao == '2':
-            listar_veiculos(veiculos)
+            cadastro.listar_veiculos()
 
         elif opcao == '3':
             print("Saindo...")
